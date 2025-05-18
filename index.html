@@ -2,489 +2,459 @@
 <html lang="it">
 
 <head>
-    <link rel="manifest" href="/manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Scheda Allenamento">
-    <title>Scheda Allenamento Personalizzata - Forza & Ipertrofia</title>
+    <meta name="apple-mobile-web-app-title" content="FitPlan Elite">
+    <link rel="manifest" href="manifest.json"> <title>FitPlan Elite - Il Tuo Allenamento Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /*------------------------------------*\
-          #VARIABLES & BASE STYLES
-        \*------------------------------------*/
         :root {
-            /* Light Mode Colors */
-            --bg-primary: #f7f8fc;
-            --bg-secondary: #ffffff;
-            --bg-muted: #f1f5f9; /* slate-100 */
-            --bg-hover: #dbeafe; /* blue-100 */
-            --bg-input: #ffffff;
-            --text-primary: #1e293b; /* slate-800 */
-            --text-secondary: #334155; /* slate-700 */
-            --text-muted: #64748b; /* slate-500 */
-            --text-accent: #2563eb; /* blue-600 */
-            --border-primary: #e2e8f0; /* slate-200 */
-            --border-secondary: #cbd5e1; /* slate-300 */
-            --border-accent: #3b82f6; /* blue-500 */
-            --icon-primary: #3b82f6;
-            --icon-secondary: #64748b;
-            --shadow-color: rgba(0, 0, 0, 0.05);
-            --shadow-hover-color: rgba(0, 0, 0, 0.08);
-            --scrollbar-track: #f1f5f9;
-            --scrollbar-thumb: #94a3b8;
-            --scrollbar-thumb-hover: #64748b;
-            --rpe-bg: #eff6ff;
-            --rpe-text: #2563eb;
-            --rpe-border: #bfdbfe;
-            --rest-bg: #f0f9ff;
-            --rest-border: #bae6fd;
-            --rest-title-text: #0369a1;
-            --rest-title-border: #7dd3fc;
-            --rest-text: #0ea5e9;
-            --rest-icon: #0ea5e9;
-            --gradient-start: #ffffff;
-            --gradient-end: #f7f8fc;
-        }
+            /* Light Mode - Fitness Inspired */
+            --bg-primary-light: #F0F4F8; /* Sfondo principale chiaro, quasi bianco ma più morbido */
+            --bg-secondary-light: #FFFFFF; /* Sfondo per card e sezioni */
+            --bg-accent-light: #10B981; /* Verde smeraldo per accenti primari (call to action, icone) */
+            --bg-accent-hover-light: #059669; /* Verde più scuro per hover */
+            --text-primary-light: #1F2937; /* Testo principale scuro (quasi nero) */
+            --text-secondary-light: #4B5563; /* Testo secondario grigio scuro */
+            --text-accent-light: #10B981; /* Testo con accento verde */
+            --border-primary-light: #D1D5DB; /* Bordi principali grigio chiaro */
+            --border-accent-light: #10B981; /* Bordi con accento verde */
+            --shadow-color-light: rgba(0, 0, 0, 0.08);
+            --icon-primary-light: #10B981;
+            --icon-secondary-light: #6B7280;
+            --input-bg-light: #F9FAFB;
+            --input-border-light: #D1D5DB;
+            --input-focus-border-light: #10B981;
+            --rpe-bg-light: #ECFDF5; /* Sfondo badge RPE verde chiaro */
+            --rpe-text-light: #065F46; /* Testo badge RPE verde scuro */
+            --rpe-border-light: #A7F3D0; /* Bordo badge RPE verde */
+            --header-gradient-start-light: #FFFFFF;
+            --header-gradient-end-light: #F0F4F8;
 
-        .dark {
-            /* Dark Mode Colors - Enhanced Aesthetics */
-            --bg-primary: #111827; /* slate-900 with slight adjustment */
-            --bg-secondary: #1f2937; /* slate-800 with better contrast */
-            --bg-muted: #374151; /* slate-700 slightly lighter */
-            --bg-hover: #2563eb; /* blue-600 more vibrant */
-            --bg-input: #374151; /* slate-700 for better readability */
-            --text-primary: #f9fafb; /* gray-50 for sharper text */
-            --text-secondary: #e5e7eb; /* gray-200 for better contrast */
-            --text-muted: #9ca3af; /* gray-400 slightly brighter */
-            --text-accent: #93c5fd; /* blue-300 more vibrant */
-            --border-primary: #374151; /* slate-700 for subtle borders */
-            --border-secondary: #4b5563; /* slate-600 with better definition */
-            --border-accent: #93c5fd; /* blue-300 for better accent */
-            --icon-primary: #93c5fd; /* blue-300 for vibrant icons */
-            --icon-secondary: #9ca3af; /* gray-400 for secondary icons */
-            --shadow-color: rgba(0, 0, 0, 0.25); /* Deeper shadows */
-            --shadow-hover-color: rgba(0, 0, 0, 0.35); /* More pronounced hover effect */
-            --scrollbar-track: #1f2937; /* slate-800 for scrollbar */
-            --scrollbar-thumb: #4b5563; /* slate-600 for thumb */
-            --scrollbar-thumb-hover: #6b7280; /* slate-500 for hover */
-            --rpe-bg: #1e40af; /* blue-800 more refined */
-            --rpe-text: #dbeafe; /* blue-100 for better readability */
-            --rpe-border: #3b82f6; /* blue-500 for definition */
-            --rest-bg: #0e7490; /* sky-800 more vibrant */
-            --rest-border: #06b6d4; /* sky-500 brighter */
-            --rest-title-text: #e0f2fe; /* sky-100 for better readability */
-            --rest-title-border: #38bdf8; /* sky-400 for definition */
-            --rest-text: #a5f3fc; /* sky-200 brighter */
-            --rest-icon: #a5f3fc; /* sky-200 matching text */
-            --gradient-start: #1f2937; /* slate-800 for gradient */
-            --gradient-end: #111827; /* slate-900 for gradient */
+
+            /* Dark Mode - Fitness Inspired */
+            --bg-primary-dark: #111827; /* Sfondo principale molto scuro (quasi nero) */
+            --bg-secondary-dark: #1F2937; /* Sfondo per card e sezioni (grigio scuro) */
+            --bg-accent-dark: #34D399; /* Verde smeraldo più brillante per accenti primari in dark mode */
+            --bg-accent-hover-dark: #10B981; /* Verde smeraldo standard per hover */
+            --text-primary-dark: #F3F4F6; /* Testo principale chiaro (quasi bianco) */
+            --text-secondary-dark: #9CA3AF; /* Testo secondario grigio chiaro */
+            --text-accent-dark: #34D399; /* Testo con accento verde brillante */
+            --border-primary-dark: #374151; /* Bordi principali grigio scuro */
+            --border-accent-dark: #34D399; /* Bordi con accento verde brillante */
+            --shadow-color-dark: rgba(0, 0, 0, 0.3);
+            --icon-primary-dark: #34D399;
+            --icon-secondary-dark: #9CA3AF;
+            --input-bg-dark: #374151;
+            --input-border-dark: #4B5563;
+            --input-focus-border-dark: #34D399;
+            --rpe-bg-dark: #064E3B; /* Sfondo badge RPE verde scuro */
+            --rpe-text-dark: #A7F3D0; /* Testo badge RPE verde chiaro */
+            --rpe-border-dark: #34D399; /* Bordo badge RPE verde brillante */
+            --header-gradient-start-dark: #1F2937;
+            --header-gradient-end-dark: #111827;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-secondary);
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-primary-light);
+            color: var(--text-secondary-light);
             transition: background-color 0.3s ease, color 0.3s ease;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /*------------------------------------*\
-          #COMPONENTS (Card, Table, Buttons etc.)
-        \*------------------------------------*/
+        .dark body {
+            background-color: var(--bg-primary-dark);
+            color: var(--text-secondary-dark);
+        }
 
-        /* Card */
-        .card {
-            background-color: var(--bg-secondary);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -2px var(--shadow-color);
-            margin-bottom: 1.5rem;
-            border: 1px solid var(--border-primary);
-            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
-                        box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
-                        background-color 0.3s ease, 
-                        border-color 0.3s ease;
-            backdrop-filter: blur(5px);
+        h1, h2, h3, .card-title-text {
+            font-family: 'Orbitron', sans-serif; /* Font più "tech" per i titoli */
         }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 20px -3px var(--shadow-hover-color), 0 4px 8px -4px var(--shadow-hover-color);
-            border-color: var(--border-accent);
+
+        /* Card Styling */
+        .workout-card {
+            background-color: var(--bg-secondary-light);
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 10px 15px -3px var(--shadow-color-light), 0 4px 6px -4px var(--shadow-color-light);
+            margin-bottom: 1.5rem; /* mb-6 */
+            border: 1px solid var(--border-primary-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
+        .dark .workout-card {
+            background-color: var(--bg-secondary-dark);
+            border-color: var(--border-primary-dark);
+            box-shadow: 0 10px 15px -3px var(--shadow-color-dark), 0 4px 6px -4px var(--shadow-color-dark);
+        }
+        .workout-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 20px 25px -5px var(--shadow-color-light), 0 8px 10px -6px var(--shadow-color-light);
+            border-color: var(--border-accent-light);
+        }
+        .dark .workout-card:hover {
+            box-shadow: 0 20px 25px -5px var(--shadow-color-dark), 0 8px 10px -6px var(--shadow-color-dark);
+            border-color: var(--border-accent-dark);
+        }
+
         .card-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 1.25rem;
-            color: var(--text-primary);
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border-accent);
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: color 0.3s ease, border-color 0.3s ease;
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 700; /* font-bold */
+            color: var(--text-primary-light);
+            margin-bottom: 1rem; /* mb-4 */
+            padding-bottom: 0.75rem; /* pb-3 */
+            border-bottom: 2px solid var(--border-accent-light);
+        }
+        .dark .card-title {
+            color: var(--text-primary-dark);
+            border-bottom-color: var(--border-accent-dark);
         }
         .card-title .icon {
-            width: 1.125rem;
-            height: 1.125rem;
+            width: 1.75rem; /* w-7 h-7 */
+            height: 1.75rem;
+            margin-right: 0.75rem; /* mr-3 */
+            color: var(--icon-primary-light);
             stroke-width: 2.5;
-            color: var(--icon-primary);
-            transition: color 0.3s ease;
+        }
+        .dark .card-title .icon {
+            color: var(--icon-primary-dark);
         }
 
-        /* Table */
+        /* Table Styling */
         .table-container {
             overflow-x: auto;
-            border: 1px solid var(--border-primary);
-            border-radius: 0.5rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-primary-light);
+            border-radius: 0.5rem; /* rounded-lg */
+            background-color: var(--bg-secondary-light);
         }
         .dark .table-container {
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            border-color: var(--border-primary-dark);
+            background-color: var(--bg-secondary-dark);
         }
-        .table-container table {
+        .workout-table {
             width: 100%;
-            min-width: 700px; /* Increased min-width for new columns */
-            border-collapse: separate; /* Changed for better styling */
+            min-width: 800px;
+            border-collapse: separate;
             border-spacing: 0;
         }
-        .table-container table tr:last-child td { 
-            border-bottom: none; 
-        }
-        th, td {
-            padding: 0.85rem 0.75rem; /* Adjusted padding */
+        .workout-table th, .workout-table td {
+            padding: 0.75rem 1rem; /* py-3 px-4 */
             text-align: left;
-            border-bottom: 1px solid var(--border-primary);
-            vertical-align: middle;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap; /* Prevent text wrapping in cells */
+            border-bottom: 1px solid var(--border-primary-light);
+            white-space: nowrap;
         }
-        th {
-            background-color: var(--bg-muted);
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 0.75rem; /* Slightly smaller header */
+        .dark .workout-table th, .dark .workout-table td {
+            border-bottom-color: var(--border-primary-dark);
+        }
+        .workout-table th {
+            background-color: var(--bg-primary-light); /* Leggermente diverso per stacco */
+            font-weight: 600; /* font-semibold */
+            color: var(--text-primary-light);
+            font-size: 0.875rem; /* text-sm */
             text-transform: uppercase;
             letter-spacing: 0.05em;
             position: sticky;
             top: 0;
             z-index: 10;
         }
-        .dark th {
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        .dark .workout-table th {
+            background-color: var(--bg-primary-dark);
+            color: var(--text-primary-dark);
         }
-        tbody tr {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .workout-table tbody tr:hover {
+            background-color: var(--bg-accent-light) !important; /* Usa !important con cautela, ma qui per enfasi hover */
+            color: var(--bg-secondary-light) !important;
         }
-        tbody tr:nth-child(odd) { background-color: var(--bg-secondary); }
-        tbody tr:nth-child(even) { background-color: var(--bg-muted); }
-        tbody tr:hover { 
-            background-color: var(--bg-hover); 
-            transform: translateY(-1px);
+        .dark .workout-table tbody tr:hover {
+            background-color: var(--bg-accent-dark) !important;
+            color: var(--bg-secondary-dark) !important;
         }
-        .dark tbody tr:hover {
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        .workout-table tbody tr:hover td, .workout-table tbody tr:hover .rpe-badge {
+             color: var(--bg-secondary-light) !important; /* Assicura che il testo nel badge cambi colore */
+        }
+        .dark .workout-table tbody tr:hover td, .dark .workout-table tbody tr:hover .rpe-badge {
+             color: var(--bg-secondary-dark) !important;
+        }
+         .dark .workout-table tbody tr:hover .rpe-badge {
+            background-color: var(--bg-secondary-dark); /* Cambia sfondo badge su hover riga */
+            border-color: var(--bg-secondary-dark);
+        }
+        .workout-table tbody tr:hover .rpe-badge {
+            background-color: var(--bg-secondary-light);
+            border-color: var(--bg-secondary-light);
         }
 
-        /* Input Fields in Table */
-        td input[type="number"] {
-            background-color: var(--bg-input);
-            color: var(--text-primary);
-            border: 1px solid var(--border-secondary);
+
+        /* Input Fields */
+        .styled-input {
+            background-color: var(--input-bg-light);
+            color: var(--text-primary-light);
+            border: 1px solid var(--input-border-light);
             border-radius: 0.375rem; /* rounded-md */
-            padding: 0.3rem 0.5rem;
-            font-size: 0.875rem;
-            width: 5.5rem; /* Fixed width for inputs */
+            padding: 0.5rem 0.75rem; /* py-2 px-3 */
+            font-size: 0.875rem; /* text-sm */
+            width: 6rem; /* w-24 */
             text-align: center;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            -moz-appearance: textfield; /* Hide spinners Firefox */
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            -moz-appearance: textfield;
         }
-        td input[type="number"]::-webkit-outer-spin-button,
-        td input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none; /* Hide spinners Chrome, Safari, Edge, Opera */
+        .dark .styled-input {
+            background-color: var(--input-bg-dark);
+            color: var(--text-primary-dark);
+            border-color: var(--input-border-dark);
+        }
+        .styled-input::-webkit-outer-spin-button,
+        .styled-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
             margin: 0;
         }
-        td input[type="number"]:focus {
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-            border-color: var(--border-accent);
-            box-shadow: 0 0 0 2px var(--bg-secondary), 0 0 0 4px var(--border-accent);
-            transform: scale(1.05);
+        .styled-input:focus {
+            outline: none;
+            border-color: var(--input-focus-border-light);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3); /* Ombra focus verde */
         }
-        .dark td input[type="number"] {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) inset;
+        .dark .styled-input:focus {
+            border-color: var(--input-focus-border-dark);
+            box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.3);
         }
 
         /* RPE Badge */
         .rpe-badge {
             display: inline-block;
-            padding: 0.25rem 0.6rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border-radius: 9999px;
+            padding: 0.3rem 0.75rem; /* py-1 px-3 */
+            font-size: 0.8rem; /* text-xs */
+            font-weight: 700; /* font-bold */
+            border-radius: 9999px; /* rounded-full */
             line-height: 1;
-            background-color: var(--rpe-bg);
-            color: var(--rpe-text);
-            border: 1px solid var(--rpe-border);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            background-color: var(--rpe-bg-light);
+            color: var(--rpe-text-light);
+            border: 1px solid var(--rpe-border-light);
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
         .dark .rpe-badge {
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+            background-color: var(--rpe-bg-dark);
+            color: var(--rpe-text-dark);
+            border-color: var(--rpe-border-dark);
         }
-
-        /* Rest Card */
-        .rest-card {
-            background-color: var(--rest-bg);
-            border-color: var(--rest-border);
-        }
-        .rest-card .card-title {
-            color: var(--rest-title-text);
-            border-color: var(--rest-title-border);
-        }
-         .rest-card .card-title .icon { color: var(--rest-icon); }
-        .rest-card p { color: var(--rest-text); }
 
         /* Header */
-        header {
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-primary);
-            background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
-            transition: border-color 0.3s ease, background 0.3s ease;
+        .main-header {
+            padding: 2rem 0; /* py-8 */
+            margin-bottom: 2.5rem; /* mb-10 */
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--header-gradient-start-light) 0%, var(--header-gradient-end-light) 100%);
         }
-        header h1 { color: var(--text-primary); transition: color 0.3s ease; }
-        header p { color: var(--text-muted); transition: color 0.3s ease; }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border-primary);
-            padding-top: 1.5rem;
-            color: var(--text-muted);
-            transition: border-color 0.3s ease, color 0.3s ease;
+        .dark .main-header {
+             background: linear-gradient(135deg, var(--header-gradient-start-dark) 0%, var(--header-gradient-end-dark) 100%);
         }
+        .main-header h1 {
+            font-size: 3rem; /* text-5xl */
+            font-weight: 900; /* font-black */
+            color: var(--text-primary-light);
+            margin-bottom: 0.5rem; /* mb-2 */
+            letter-spacing: -0.025em;
+        }
+        .dark .main-header h1 { color: var(--text-primary-dark); }
+        .main-header .subtitle {
+            font-size: 1.25rem; /* text-xl */
+            color: var(--text-secondary-light);
+            font-family: 'Roboto', sans-serif;
+        }
+        .dark .main-header .subtitle { color: var(--text-secondary-dark); }
 
         /* Action Buttons (Print, Theme Toggle) */
         .action-button {
             display: inline-flex;
             align-items: center;
-            justify-content: center; /* Center icon */
-            padding: 0.5rem; /* Square padding */
-            background-color: var(--bg-secondary);
-            color: var(--text-secondary);
+            justify-content: center;
+            padding: 0.6rem; /* Increased padding */
+            background-color: var(--bg-secondary-light);
+            color: var(--text-secondary-light);
             border-radius: 0.5rem; /* rounded-lg */
-            border: 1px solid var(--border-primary);
+            border: 1px solid var(--border-primary-light);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 1px 3px 0 var(--shadow-color), 0 1px 2px -1px var(--shadow-color);
-            position: relative;
-            overflow: hidden;
-        }
-        .action-button::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, var(--border-accent) 0%, transparent 70%);
-            opacity: 0;
-            transform: scale(0.5);
-            transition: opacity 0.4s ease, transform 0.3s ease;
-        }
-        .action-button:hover {
-            background-color: var(--bg-muted);
-            border-color: var(--border-accent);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
-        }
-        .action-button:hover::after {
-            opacity: 0.15;
-            transform: scale(2);
-        }
-        .action-button .icon {
-            width: 1.25rem; /* Larger icon */
-            height: 1.25rem;
-            stroke-width: 2;
-            color: var(--icon-secondary); /* Use secondary icon color */
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-        }
-        .action-button:hover .icon {
-            color: var(--icon-primary); /* Use primary icon color on hover */
-            transform: scale(1.1);
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 1px 3px 0 var(--shadow-color-light), 0 1px 2px -1px var(--shadow-color-light);
         }
         .dark .action-button {
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+            background-color: var(--bg-secondary-dark);
+            color: var(--text-secondary-dark);
+            border-color: var(--border-primary-dark);
+            box-shadow: 0 1px 3px 0 var(--shadow-color-dark), 0 1px 2px -1px var(--shadow-color-dark);
+        }
+        .action-button:hover {
+            background-color: var(--bg-accent-light);
+            border-color: var(--bg-accent-light);
+            color: #FFFFFF; /* Testo bianco su sfondo verde */
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 8px -2px rgba(16,185,129,0.4), 0 2px 4px -2px rgba(16,185,129,0.3);
         }
         .dark .action-button:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.4);
+            background-color: var(--bg-accent-dark);
+            border-color: var(--bg-accent-dark);
+            color: var(--bg-primary-dark); /* Testo scuro su sfondo verde brillante */
+            box-shadow: 0 4px 8px -2px rgba(52,211,153,0.4), 0 2px 4px -2px rgba(52,211,153,0.3);
         }
+        .action-button .icon {
+            width: 1.5rem; /* w-6 h-6 */
+            height: 1.5rem;
+            stroke-width: 2;
+        }
+        .action-button:hover .icon {
+            /* Il colore dell'icona è gestito dal colore del testo del bottone */
+        }
+
+        /* Footer */
+        .main-footer {
+            border-top: 1px solid var(--border-primary-light);
+            padding: 2rem 0; /* py-8 */
+            margin-top: 2.5rem; /* mt-10 */
+            text-align: center;
+            font-size: 0.875rem; /* text-sm */
+            color: var(--text-secondary-light);
+        }
+        .dark .main-footer {
+            border-top-color: var(--border-primary-dark);
+            color: var(--text-secondary-dark);
+        }
+        .main-footer p { margin-bottom: 0.5rem; }
 
         /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: var(--scrollbar-track); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 10px; border: 2px solid var(--scrollbar-track); }
-        ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
-        
-        /* Theme Transition Animation */
-        .theme-transition {
-            transition: background-color 0.5s ease, 
-                        color 0.5s ease, 
-                        border-color 0.5s ease, 
-                        box-shadow 0.5s ease !important;
-        }
-        
-        .theme-transition * {
-            transition: background-color 0.5s ease, 
-                        color 0.5s ease, 
-                        border-color 0.5s ease, 
-                        box-shadow 0.5s ease !important;
-        }
-        
-        .theme-toggle-active {
-            animation: pulse 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .dark .card, .dark .table-container, .dark .action-button {
-            backdrop-filter: blur(5px);
-        }
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary-light); border-radius: 10px; }
+        .dark ::-webkit-scrollbar-track { background: var(--bg-primary-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--bg-accent-light); border-radius: 10px; border: 2px solid var(--bg-primary-light); }
+        .dark ::-webkit-scrollbar-thumb { background: var(--bg-accent-dark); border: 2px solid var(--bg-primary-dark); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--bg-accent-hover-light); }
+        .dark ::-webkit-scrollbar-thumb:hover { background: var(--bg-accent-hover-dark); }
 
-        /*------------------------------------*\
-          #PRINT STYLES
-        \*------------------------------------*/
+        /* Print Styles */
         @media print {
-            :root { /* Reset variables for print */
-                --bg-primary: #ffffff;
-                --bg-secondary: #ffffff;
-                --bg-muted: #eeeeee;
-                --text-primary: #000000;
-                --text-secondary: #000000;
-                --text-muted: #333333;
-                --border-primary: #cccccc;
-                --border-secondary: #dddddd;
-                --border-accent: #999999;
-                --rpe-bg: transparent;
-                --rpe-text: #000000;
-                --rpe-border: #999999;
-                --rest-bg: #f5f5f5;
-                --rest-border: #cccccc;
-                --rest-title-text: #000000;
-                --rest-title-border: #999999;
-                --rest-text: #333333;
+            :root {
+                --bg-primary-light: #ffffff;
+                --bg-secondary-light: #ffffff;
+                --text-primary-light: #000000;
+                --text-secondary-light: #000000;
+                --border-primary-light: #cccccc;
+                --border-accent-light: #999999;
+                --rpe-bg-light: transparent;
+                --rpe-text-light: #000000;
+                --rpe-border-light: #999999;
             }
             body {
-                background-color: var(--bg-primary);
-                color: var(--text-primary);
+                background-color: var(--bg-primary-light);
+                color: var(--text-primary-light);
                 font-size: 10pt;
                 margin: 1cm;
+                -webkit-print-color-adjust: exact; /* Forza la stampa dei colori di sfondo */
+                color-adjust: exact;
             }
-            header, footer, .action-buttons-container { /* Hide header, footer, and action buttons */
+            .main-header, .main-footer, .action-buttons-container, .user-data-section, .weekly-schedule-section, .key-principles-section, .nutrition-guide-section, .warmup-cooldown-section, .rpe-guide-section {
                 display: none;
             }
-            .card, .table-container {
+            .workout-card {
                 box-shadow: none;
-                border: 1px solid var(--border-primary);
+                border: 1px solid var(--border-primary-light);
                 border-radius: 0;
                 padding: 0.5rem;
                 margin-bottom: 1rem;
                 page-break-inside: avoid;
             }
-            .card:hover { transform: none; }
             .card-title {
-                border-bottom: 1px solid var(--border-accent);
+                border-bottom: 1px solid var(--border-accent-light);
                 font-size: 12pt;
-                color: var(--text-primary);
             }
-            .card-title .icon { display: none; } /* Hide icons */
-            th, td {
+            .card-title .icon { display: none; }
+            .workout-table th, .workout-table td {
                 padding: 0.3rem 0.5rem;
-                border-bottom: 1px solid var(--border-secondary);
-                white-space: normal; /* Allow wrapping for print */
+                border-bottom: 1px solid var(--border-primary-light);
+                white-space: normal;
             }
-            th { background-color: var(--bg-muted); }
-            tbody tr:nth-child(odd), tbody tr:nth-child(even), tbody tr:hover {
-                background-color: var(--bg-secondary);
-            }
-            td input[type="number"] {
-                border: 1px dashed #999999; /* Dashed border for inputs */
-                width: 4rem; /* Smaller width for print */
+            .workout-table th { background-color: #eeeeee; }
+            .workout-table tbody tr:hover { background-color: transparent !important; color: inherit !important; }
+            .styled-input {
+                border: 1px dashed #999999 !important;
+                width: 4rem;
                 padding: 0.1rem 0.3rem;
-                background-color: #f9f9f9;
+                background-color: #f9f9f9 !important;
+                color: #000000 !important;
             }
             .rpe-badge {
-                border: 1px solid var(--rpe-border);
-                color: var(--rpe-text);
-                background-color: var(--rpe-bg);
+                border: 1px solid var(--rpe-border-light) !important;
+                color: var(--rpe-text-light) !important;
+                background-color: var(--rpe-bg-light) !important;
                 padding: 0.1rem 0.4rem;
             }
-            .rest-card {
-                 background-color: var(--rest-bg);
-                 border-color: var(--rest-border);
-            }
-             .rest-card .card-title {
-                 color: var(--rest-title-text);
-                 border-color: var(--rest-title-border);
-             }
-             .rest-card p { color: var(--rest-text); }
-             ul { padding-left: 1.5rem; }
-             a { text-decoration: none; color: #000000; }
-             main { max-width: 100%; }
-             .grid { display: block; } /* Linear layout for print */
-             .table-container table { min-width: auto; } /* Remove min-width */
+            .grid { display: block; }
+            .workout-table { min-width: auto; }
+            .session-title { font-size: 1.5rem; margin-bottom: 1rem; text-align: center; }
         }
 
-        /*------------------------------------*\
-          #MOBILE STYLES (Tailwind handles most, but some overrides)
-        \*------------------------------------*/
+        /* Mobile Styles */
         @media (max-width: 768px) { /* md breakpoint */
-             body { padding: 0.5rem; } /* Less padding on small screens */
-             header { padding-bottom: 1rem; }
-             header h1 { font-size: 1.75rem; } /* Smaller title */
-             header p { font-size: 1rem; }
-             .action-buttons-container { top: 0.5rem; right: 0.5rem; gap: 0.5rem;} /* Adjust button position */
-             .action-button { padding: 0.4rem; }
-             .action-button .icon { width: 1rem; height: 1rem;}
+             body { padding: 0.75rem; } /* p-3 */
+             .main-header { padding: 1.5rem 0; margin-bottom: 1.5rem; }
+             .main-header h1 { font-size: 2.25rem; } /* text-4xl */
+             .main-header .subtitle { font-size: 1rem; } /* text-lg */
+             .action-buttons-container { top: 0.75rem; right: 0.75rem; gap: 0.5rem;}
+             .action-button { padding: 0.5rem; }
+             .action-button .icon { width: 1.25rem; height: 1.25rem;}
 
-             .card { padding: 1rem; margin-bottom: 1rem;}
-             .card-title { font-size: 1rem; margin-bottom: 1rem;}
-             .card-title .icon { width: 1rem; height: 1rem;}
+             .workout-card { padding: 1rem; margin-bottom: 1rem;}
+             .card-title { font-size: 1.25rem; } /* text-xl */
+             .card-title .icon { width: 1.5rem; height: 1.5rem;}
 
-             th, td { padding: 0.6rem 0.5rem; font-size: 0.8rem; } /* Smaller padding/font in tables */
-             th { font-size: 0.65rem; }
-             td input[type="number"] { width: 4.5rem; padding: 0.2rem 0.4rem; font-size: 0.8rem;} /* Adjust input size */
-
-             .table-container table { min-width: 600px; } /* Adjust min-width if needed */
-
-             .grid { grid-template-columns: 1fr; } /* Force single column */
-             section h2 { font-size: 1.25rem; } /* Smaller section title */
-             footer { font-size: 0.65rem; margin-top: 1.5rem; padding-top: 1rem;}
+             .workout-table th, .workout-table td { padding: 0.6rem 0.5rem; font-size: 0.8rem; }
+             .workout-table th { font-size: 0.7rem; }
+             .styled-input { width: 5rem; padding: 0.4rem 0.5rem; font-size: 0.8rem;}
+             .workout-table { min-width: 650px; }
+             .grid-cols-1_lg-grid-cols-2 { grid-template-columns: 1fr; }
+             .session-title { font-size: 1.5rem; }
+             .main-footer { font-size: 0.75rem; margin-top: 1.5rem; padding: 1.5rem 0;}
+        }
+        .session-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            margin-bottom: 2rem; /* mb-8 */
+            text-align: center;
+            color: var(--text-primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem; /* gap-3 */
+        }
+        .dark .session-title {
+            color: var(--text-primary-dark);
+        }
+        .session-title .icon {
+            width: 2rem; /* w-8 h-8 */
+            height: 2rem;
+            color: var(--icon-primary-light);
+        }
+        .dark .session-title .icon {
+            color: var(--icon-primary-dark);
         }
 
     </style>
 </head>
 
-<body class="p-4 md:p-8">
+<body class="p-4 md:p-6 lg:p-8">
 
-    <header class="mb-8 text-center relative">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">Scheda Allenamento</h1>
-        <p class="text-lg">Obiettivo: Forza & Ipertrofia (Livello Intermedio)</p>
-        <div class="action-buttons-container absolute top-4 right-4 md:top-6 md:right-8 flex gap-2">
+    <header class="main-header">
+        <h1>FitPlan Elite</h1>
+        <p class="subtitle">Il Tuo Percorso Personalizzato per Forza e Massa Muscolare</p>
+        <div class="action-buttons-container absolute top-4 right-4 md:top-6 md:right-8 flex gap-3">
              <button id="theme-toggle" title="Cambia Tema" class="action-button">
                  <span id="theme-icon-light" data-lucide="sun" class="icon"></span>
                  <span id="theme-icon-dark" data-lucide="moon" class="icon hidden"></span>
@@ -496,589 +466,502 @@
     </header>
 
     <main class="max-w-7xl mx-auto">
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-            <div class="card">
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10 user-data-section weekly-schedule-section">
+            <div class="workout-card">
                 <h2 class="card-title">
-                    <span data-lucide="user-circle-2" class="icon"></span>
-                    I Tuoi Dati
+                    <span data-lucide="user" class="icon"></span>
+                    <span class="card-title-text">Profilo Atleta</span>
                 </h2>
                 <ul class="space-y-2 text-sm md:text-base">
-                    <li class="flex items-center"><span class="font-medium text-slate-700 dark:text-slate-300 w-24 md:w-28">Età:</span> 24 anni</li>
-                    <li class="flex items-center"><span class="font-medium text-slate-700 dark:text-slate-300 w-24 md:w-28">Peso:</span> 70 kg</li>
-                    <li class="flex items-center"><span class="font-medium text-slate-700 dark:text-slate-300 w-24 md:w-28">Altezza:</span> 175 cm</li>
-                    <li class="flex items-center"><span class="font-medium text-slate-700 dark:text-slate-300 w-24 md:w-28">Livello:</span> Intermedio</li>
-                    <li class="flex items-center"><span class="font-medium text-slate-700 dark:text-slate-300 w-24 md:w-28">Frequenza:</span> 4 / settimana</li>
-                    <li class="flex items-center"><span class="font-medium text-slate-700 dark:text-slate-300 w-24 md:w-28">Durata:</span> 60-75 min</li>
+                    <li class="flex items-center"><span data-lucide="cake" class="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400"></span><span class="font-medium text-gray-700 dark:text-gray-300 w-28">Età:</span> 24 anni</li>
+                    <li class="flex items-center"><span data-lucide="weight" class="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400"></span><span class="font-medium text-gray-700 dark:text-gray-300 w-28">Peso:</span> 70 kg</li>
+                    <li class="flex items-center"><span data-lucide="ruler" class="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400"></span><span class="font-medium text-gray-700 dark:text-gray-300 w-28">Altezza:</span> 175 cm</li>
+                    <li class="flex items-center"><span data-lucide="bar-chart-3" class="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400"></span><span class="font-medium text-gray-700 dark:text-gray-300 w-28">Livello:</span> Intermedio</li>
+                    <li class="flex items-center"><span data-lucide="repeat" class="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400"></span><span class="font-medium text-gray-700 dark:text-gray-300 w-28">Frequenza:</span> 4 / sett.</li>
+                    <li class="flex items-center"><span data-lucide="timer" class="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400"></span><span class="font-medium text-gray-700 dark:text-gray-300 w-28">Durata:</span> 60-90 min</li>
                 </ul>
             </div>
-            <div class="card">
+            <div class="workout-card">
                 <h2 class="card-title">
                     <span data-lucide="calendar-days" class="icon"></span>
-                    Programmazione Settimanale
+                     <span class="card-title-text">Split Settimanale</span>
                 </h2>
                 <ul class="space-y-1.5 text-sm md:text-base">
-                    <li><strong>Lunedì:</strong> Giorno 1 (Upper Body - Forza)</li>
-                    <li><strong>Martedì:</strong> Giorno 2 (Lower Body - Forza)</li>
-                    <li class="text-slate-400 dark:text-slate-600"><strong>Mercoledì:</strong> Riposo</li>
-                    <li><strong>Giovedì:</strong> Giorno 3 (Upper Body - Ipertrofia)</li>
-                    <li><strong>Venerdì:</strong> Giorno 4 (Lower Body - Ipertrofia)</li>
-                    <li class="text-slate-400 dark:text-slate-600"><strong>Sabato:</strong> Riposo</li>
-                    <li class="text-slate-400 dark:text-slate-600"><strong>Domenica:</strong> Riposo</li>
+                    <li><strong class="text-emerald-600 dark:text-emerald-400">Lunedì:</strong> Giorno 1 (Forza - Upper Body)</li>
+                    <li><strong class="text-emerald-600 dark:text-emerald-400">Martedì:</strong> Giorno 2 (Forza - Lower Body & Core)</li>
+                    <li class="text-gray-400 dark:text-gray-600"><strong>Mercoledì:</strong> Riposo / Recupero Attivo</li>
+                    <li><strong class="text-sky-600 dark:text-sky-400">Giovedì:</strong> Giorno 3 (Ipertrofia - Upper Body)</li>
+                    <li><strong class="text-sky-600 dark:text-sky-400">Venerdì:</strong> Giorno 4 (Ipertrofia - Lower Body & Core)</li>
+                    <li class="text-gray-400 dark:text-gray-600"><strong>Sabato:</strong> Riposo / Recupero Attivo</li>
+                    <li class="text-gray-400 dark:text-gray-600"><strong>Domenica:</strong> Riposo</li>
                 </ul>
-                <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-4 italic">Nota: Puoi adattare i giorni, mantenendo lo schema e il riposo.</p>
+                <p class="text-xs md:text-sm text-gray-500 dark:text-gray-400 mt-4 italic">Questo split è un suggerimento. Adattalo ai tuoi impegni, mantenendo i giorni di riposo.</p>
             </div>
         </section>
 
-        <section class="card mb-10">
+        <section class="workout-card mb-10 warmup-cooldown-section">
              <h2 class="card-title">
                  <span data-lucide="flame" class="icon"></span>
-                 Riscaldamento (Warmup) / Defaticamento (Cooldown)
+                 <span class="card-title-text">Warm-up & Cool-down</span>
              </h2>
              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                  <div>
-                     <h3 class="font-semibold text-slate-700 dark:text-slate-300 mb-2 text-base">Riscaldamento (Pre-Sessione):</h3>
-                     <ul class="list-disc list-inside space-y-1 text-sm text-slate-600 dark:text-slate-400 pl-2">
-                         <li>5-10 min cardio leggero (cyclette, tapis roulant)</li>
-                         <li>Mobilità articolare dinamica (cerchi braccia/gambe, etc.)</li>
-                         <li>Serie di attivazione specifiche per gli esercizi principali</li>
+                     <h3 class="font-semibold text-gray-700 dark:text-gray-300 mb-2 text-lg flex items-center"><span data-lucide="sunrise" class="w-5 h-5 mr-2"></span>Riscaldamento (10-15 min)</h3>
+                     <ul class="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 pl-2">
+                         <li>5 min cardio leggero (cyclette, ellittica, salto corda)</li>
+                         <li>Mobilità articolare dinamica: circonduzioni (collo, spalle, polsi, busto, anche, ginocchia, caviglie)</li>
+                         <li>Attivazione specifica: 1-2 serie leggere degli esercizi principali del giorno (es. solo bilanciere per panca/squat)</li>
+                         <li>Esercizi per la cuffia dei rotatori (bande elastiche) se si allena l'upper body.</li>
                      </ul>
                  </div>
                  <div>
-                     <h3 class="font-semibold text-slate-700 dark:text-slate-300 mb-2 text-base">Defaticamento (Post-Sessione):</h3>
-                     <ul class="list-disc list-inside space-y-1 text-sm text-slate-600 dark:text-slate-400 pl-2">
-                          <li>5-10 min stretching statico leggero</li>
-                          <li>Focus sui muscoli allenati (20-30 sec per posizione)</li>
-                          <li>Respirazione controllata</li>
+                     <h3 class="font-semibold text-gray-700 dark:text-gray-300 mb-2 text-lg flex items-center"><span data-lucide="sunset" class="w-5 h-5 mr-2"></span>Defaticamento (5-10 min)</h3>
+                     <ul class="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 pl-2">
+                          <li>5 min cardio leggero (camminata)</li>
+                          <li>Stretching statico per i principali gruppi muscolari allenati (tenere ogni posizione per 20-30 secondi)</li>
+                          <li>Foam rolling (opzionale)</li>
+                          <li>Respirazione diaframmatica per rilassamento.</li>
                      </ul>
                  </div>
              </div>
         </section>
 
-        <section class="card mb-10">
+        <section class="workout-card mb-10 rpe-guide-section">
             <h2 class="card-title">
-                <span data-lucide="scale" class="icon"></span>
-                Guida alla Scala RPE
+                <span data-lucide="activity" class="icon"></span>
+                <span class="card-title-text">Guida alla Scala RPE</span>
             </h2>
             <p class="text-sm md:text-base mb-4">
-                L'RPE (Rate of Perceived Exertion) misura l'intensità percepita dello sforzo su una scala da 1 a 10. Ti aiuta a regolare l'allenamento in base a come ti senti quel giorno.
+                L'RPE (Rate of Perceived Exertion) è una misura soggettiva dell'intensità dello sforzo. Ti aiuta a personalizzare il carico in base alle tue sensazioni giornaliere.
+                <strong>RIR (Reps In Reserve)</strong> indica quante ripetizioni pulite avresti ancora potuto fare.
             </p>
-            <ul class="list-disc list-inside space-y-1 text-sm text-slate-600 dark:text-slate-400 pl-2">
-                <li><strong>RPE 10:</strong> Sforzo massimale, nessuna ripetizione rimasta in canna.</li>
-                <li><strong>RPE 9:</strong> Sforzo molto duro, 1 ripetizione rimasta.</li>
-                <li><strong>RPE 8:</strong> Sforzo duro, 2 ripetizioni rimaste.</li>
-                <li><strong>RPE 7:</strong> Sforzo moderato-duro, 3 ripetizioni rimaste.</li>
-                <li><strong>RPE 6:</strong> Sforzo moderato, 4 ripetizioni rimaste.</li>
-                <li><strong>RPE 5:</strong> Sforzo leggero-moderato, 5-6 ripetizioni rimaste.</li>
-                <li><strong>RPE 1-4:</strong> Sforzo molto leggero, riscaldamento o recupero attivo.</li>
-            </ul>
-            <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-4 italic">
-                Cerca di essere onesto con te stesso nella valutazione. L'RPE target è indicato nella tabella per guidarti. Inserisci l'RPE effettivo che hai percepito dopo ogni set principale.
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-100 dark:bg-gray-700">
+                        <tr>
+                            <th class="p-2 border dark:border-gray-600">RPE</th>
+                            <th class="p-2 border dark:border-gray-600">Descrizione Sforzo</th>
+                            <th class="p-2 border dark:border-gray-600">RIR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="p-2 border dark:border-gray-600"><strong>10</strong></td><td class="p-2 border dark:border-gray-600">Massimale, cedimento tecnico</td><td class="p-2 border dark:border-gray-600">0</td></tr>
+                        <tr><td class="p-2 border dark:border-gray-600"><strong>9.5</strong></td><td class="p-2 border dark:border-gray-600">Estremamente duro, forse 1 rep in più</td><td class="p-2 border dark:border-gray-600">0-1</td></tr>
+                        <tr><td class="p-2 border dark:border-gray-600"><strong>9</strong></td><td class="p-2 border dark:border-gray-600">Molto duro</td><td class="p-2 border dark:border-gray-600">1</td></tr>
+                        <tr><td class="p-2 border dark:border-gray-600"><strong>8.5</strong></td><td class="p-2 border dark:border-gray-600">Duro, forse 2 rep in più</td><td class="p-2 border dark:border-gray-600">1-2</td></tr>
+                        <tr><td class="p-2 border dark:border-gray-600"><strong>8</strong></td><td class="p-2 border dark:border-gray-600">Duro</td><td class="p-2 border dark:border-gray-600">2</td></tr>
+                        <tr><td class="p-2 border dark:border-gray-600"><strong>7</strong></td><td class="p-2 border dark:border-gray-600">Moderato-Duro</td><td class="p-2 border dark:border-gray-600">3</td></tr>
+                        <tr><td class="p-2 border dark:border-gray-600"><strong>5-6</strong></td><td class="p-2 border dark:border-gray-600">Moderato</td><td class="p-2 border dark:border-gray-600">4-6</td></tr>
+                        <tr><td class="p-2 border dark:border-gray-600"><strong>1-4</strong></td><td class="p-2 border dark:border-gray-600">Leggero, recupero/riscaldamento</td><td class="p-2 border dark:border-gray-600">>6</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-xs md:text-sm text-gray-500 dark:text-gray-400 mt-4 italic">
+                Sii onesto nella valutazione. L'RPE target è una guida; adatta il peso per raggiungerlo.
             </p>
         </section>
 
         <section>
-            <h2 class="text-2xl font-semibold mb-6 text-center flex items-center justify-center gap-3">
-                 <span data-lucide="dumbbell" class="w-6 h-6 text-slate-800 dark:text-slate-200"></span>
-                 Dettaglio Allenamenti Settimanali
-                 <span data-lucide="dumbbell" class="w-6 h-6 text-slate-800 dark:text-slate-200"></span>
+            <h2 class="session-title">
+                 <span data-lucide="swords" class="icon"></span>
+                 Sessioni di Forza
+                 <span data-lucide="shield-check" class="icon"></span>
             </h2>
 
-            <article class="card">
+            <article class="workout-card">
                 <h3 class="card-title">
-                    <span data-lucide="weight" class="icon"></span>
-                    Giorno 1: Upper Body (Forza)
+                    <span data-lucide="git-commit" class="icon"></span> <span class="card-title-text">Giorno 1: Forza - Upper Body</span>
                 </h3>
                 <div class="table-container">
-                    <table>
+                    <table class="workout-table">
                         <thead>
                             <tr>
-                                <th>Esercizio</th>
-                                <th>Serie</th>
-                                <th>Rip.</th>
-                                <th>Recupero</th>
-                                <th>RPE Target</th>
-                                <th>Peso Eff. (kg)</th> <th>RPE Eff.</th> <th>Note</th>
+                                <th>Esercizio</th><th>Serie</th><th>Rip.</th><th>Recupero</th><th>RPE Target</th><th>Peso (kg)</th><th>RPE Eff.</th><th>Note</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="font-medium">Panca Piana Bilanciere</td>
-                                <td>4</td>
-                                <td>4-6</td>
-                                <td>2-3 min</td>
-                                <td><span class="rpe-badge">8-9</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Panca Piana"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Panca Piana"></td>
-                                <td>Spinta esplosiva, controllo discesa</td>
+                                <td class="font-medium">Panca Piana Bilanciere</td><td>4</td><td>3-5</td><td>2-3 min</td><td><span class="rpe-badge">8-9</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Panca Piana Forza"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Panca Piana Forza"></td>
+                                <td>Focus spinta esplosiva, controllo eccentrica.</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Rematore Bilanciere</td>
-                                <td>4</td>
-                                <td>5-8</td>
-                                <td>2-3 min</td>
-                                <td><span class="rpe-badge">8-9</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Rematore"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Rematore"></td>
-                                <td>Schiena dritta, contrazione dorsali</td>
+                                <td class="font-medium">Rematore Bilanciere (Pendlay/Yates)</td><td>4</td><td>4-6</td><td>2-3 min</td><td><span class="rpe-badge">8-9</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Rematore Forza"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Rematore Forza"></td>
+                                <td>Schiena forte, tirata al petto/addome.</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Overhead Press (in piedi)</td>
-                                <td>3</td>
-                                <td>5-8</td>
-                                <td>2 min</td>
-                                <td><span class="rpe-badge">8-9</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Overhead Press"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Overhead Press"></td>
-                                <td>Core contratto, no slancio</td>
+                                <td class="font-medium">Military Press (in piedi)</td><td>3</td><td>4-6</td><td>2 min</td><td><span class="rpe-badge">8-9</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Military Press Forza"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Military Press Forza"></td>
+                                <td>Core attivo, no leg drive eccessivo.</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Trazioni Sbarra / Lat Machine</td>
-                                <td>3</td>
-                                <td>6-10</td>
-                                <td>1.5 - 2 min</td>
-                                <td><span class="rpe-badge">8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Trazioni/Lat"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Trazioni/Lat"></td>
-                                <td>Movimento completo, controllo</td>
+                                <td class="font-medium">Trazioni alla Sbarra (prona/supina)</td><td>3</td><td>Max reps (target 5-8)</td><td>2 min</td><td><span class="rpe-badge">8-9</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="BW" aria-label="Peso Trazioni Forza"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Trazioni Forza"></td>
+                                <td>Zavorrare se >8 reps facili. Se <5, usare Lat Machine.</td>
                             </tr>
                              <tr>
-                                <td class="font-medium">Dip alle Parallele</td>
-                                <td>3</td>
-                                <td>6-10</td>
-                                <td>1.5 - 2 min</td>
-                                <td><span class="rpe-badge">8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Dip"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Dip"></td>
-                                <td>Aggiungere peso se necessario</td>
+                                <td class="font-medium">Dip alle Parallele</td><td>3</td><td>6-10</td><td>1.5-2 min</td><td><span class="rpe-badge">8</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="BW" aria-label="Peso Dip Forza"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Dip Forza"></td>
+                                <td>Focus petto/tricipiti. Zavorrare se necessario.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </article>
 
-            <article class="card">
+            <article class="workout-card">
                  <h3 class="card-title">
-                    <span data-lucide="weight" class="icon"></span>
-                    Giorno 2: Lower Body (Forza)
+                    <span data-lucide="anchor" class="icon"></span> <span class="card-title-text">Giorno 2: Forza - Lower Body & Core</span>
                 </h3>
                  <div class="table-container">
-                    <table>
+                    <table class="workout-table">
                         <thead>
                             <tr>
-                                <th>Esercizio</th>
-                                <th>Serie</th>
-                                <th>Rip.</th>
-                                <th>Recupero</th>
-                                <th>RPE Target</th>
-                                <th>Peso Eff. (kg)</th>
-                                <th>RPE Eff.</th>
-                                <th>Note</th>
+                                <th>Esercizio</th><th>Serie</th><th>Rip.</th><th>Recupero</th><th>RPE Target</th><th>Peso (kg)</th><th>RPE Eff.</th><th>Note</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="font-medium">Squat Bilanciere</td>
-                                <td>4</td>
-                                <td>4-6</td>
-                                <td>2-3 min</td>
-                                <td><span class="rpe-badge">8-9</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Squat"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Squat"></td>
-                                <td>Profondità controllata (almeno parallelo)</td>
+                                <td class="font-medium">Squat Bilanciere (High/Low Bar)</td><td>4</td><td>3-5</td><td>3 min</td><td><span class="rpe-badge">8-9</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Squat Forza"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Squat Forza"></td>
+                                <td>Profondità (almeno parallelo), schiena neutra.</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Stacco Rumeno (RDL)</td>
-                                <td>4</td>
-                                <td>6-8</td>
-                                <td>2-3 min</td>
-                                <td><span class="rpe-badge">8-9</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo RDL"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo RDL"></td>
-                                <td>Schiena neutra, focus femorali/glutei</td>
+                                <td class="font-medium">Stacco da Terra (Conv./Sumo)</td><td>1</td><td>3-5 (Top Set)</td><td>3-4 min</td><td><span class="rpe-badge">9</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Stacco Forza"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Stacco Forza"></td>
+                                <td>Tecnica impeccabile. Eventuali serie di back-off più leggere (2x5 @RPE 7).</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Leg Press</td>
-                                <td>3</td>
-                                <td>8-10</td>
-                                <td>2 min</td>
-                                <td><span class="rpe-badge">8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Leg Press"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Leg Press"></td>
-                                <td>Range di movimento completo</td>
+                                <td class="font-medium">Good Morning / Stacco Rumeno</td><td>3</td><td>6-8</td><td>2 min</td><td><span class="rpe-badge">8</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Good Morning/RDL Forza"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Good Morning/RDL Forza"></td>
+                                <td>Focus catena posteriore.</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Leg Curl (sdraiato/seduto)</td>
-                                <td>3</td>
-                                <td>8-12</td>
-                                <td>1.5 min</td>
-                                <td><span class="rpe-badge">8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Leg Curl"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Leg Curl"></td>
-                                <td>Contrazione di picco</td>
+                                <td class="font-medium">Affondi Bilanciere/Manubri</td><td>3</td><td>6-8 / gamba</td><td>1.5-2 min</td><td><span class="rpe-badge">8</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Affondi Forza"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Affondi Forza"></td>
+                                <td>Controllo e stabilità.</td>
                             </tr>
                              <tr>
-                                <td class="font-medium">Calf Raise (in piedi)</td>
-                                <td>4</td>
-                                <td>8-12</td>
-                                <td>1 - 1.5 min</td>
-                                <td><span class="rpe-badge">8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Calf Raise Piedi"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Calf Raise Piedi"></td>
-                                <td>Pausa in alto e stretch in basso</td>
+                                <td class="font-medium">Plank Zavorrato / Dragon Flag</td><td>3</td><td>30-60 sec / Max reps</td><td>1 min</td><td><span class="rpe-badge">8-9</span></td>
+                                <td><input type="text" class="styled-input" placeholder="--" aria-label="Peso/Note Core Forza"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Core Forza"></td>
+                                <td>Core contratto al massimo.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </article>
 
-             <article class="card rest-card">
-                  <h3 class="card-title">
-                     <span data-lucide="bed-double" class="icon"></span>
-                     Giorno 3: Riposo
-                 </h3>
-                 <p class="text-sm md:text-base">Recupero attivo leggero (es. camminata 30-45 min, stretching dinamico) o riposo completo. Ascolta il tuo corpo e favorisci il recupero.</p>
-             </article>
+            <div class="workout-card my-8 bg-gray-50 dark:bg-gray-800 border-dashed border-gray-300 dark:border-gray-700">
+                <h3 class="card-title text-gray-600 dark:text-gray-400">
+                   <span data-lucide="coffee" class="icon text-gray-500 dark:text-gray-500"></span>
+                   <span class="card-title-text">Mercoledì: Riposo Attivo</span>
+               </h3>
+               <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">
+                   Giornata dedicata al recupero. Considera:
+                   <ul class="list-disc list-inside pl-4 mt-2 space-y-1">
+                       <li>Camminata leggera (30-60 minuti)</li>
+                       <li>Yoga o stretching leggero</li>
+                       <li>Mobilità articolare</li>
+                       <li>Sonno di qualità e nutrizione adeguata.</li>
+                   </ul>
+                   L'obiettivo è favorire il recupero senza affaticare ulteriormente il corpo.
+               </p>
+           </div>
 
-            <article class="card">
+
+            <h2 class="session-title mt-12">
+                 <span data-lucide="gem" class="icon"></span>
+                 Sessioni di Ipertrofia
+                 <span data-lucide="trending-up" class="icon"></span>
+            </h2>
+
+            <article class="workout-card">
                  <h3 class="card-title">
-                    <span data-lucide="trending-up" class="icon"></span>
-                    Giorno 4: Upper Body (Ipertrofia)
+                    <span data-lucide="user-plus" class="icon"></span> <span class="card-title-text">Giorno 3: Ipertrofia - Upper Body</span>
                 </h3>
                  <div class="table-container">
-                    <table>
+                    <table class="workout-table">
                         <thead>
                             <tr>
-                                <th>Esercizio</th>
-                                <th>Serie</th>
-                                <th>Rip.</th>
-                                <th>Recupero</th>
-                                <th>RPE Target</th>
-                                <th>Peso Eff. (kg)</th>
-                                <th>RPE Eff.</th>
-                                <th>Note</th>
+                                <th>Esercizio</th><th>Serie</th><th>Rip.</th><th>Recupero</th><th>RPE Target</th><th>Peso (kg)</th><th>RPE Eff.</th><th>Note</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="font-medium">Panca Inclinata Manubri</td>
-                                <td>3-4</td>
-                                <td>8-12</td>
-                                <td>1.5 - 2 min</td>
-                                <td><span class="rpe-badge">7-8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Panca Inclinata"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Panca Inclinata"></td>
-                                <td>Focus parte alta petto, stretch</td>
+                                <td class="font-medium">Panca Inclinata Manubri</td><td>3-4</td><td>8-12</td><td>60-90 sec</td><td><span class="rpe-badge">8-9</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Panca Inclinata Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Panca Inclinata Ipertrofia"></td>
+                                <td>Stretch e contrazione del petto alto.</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Pulley Basso / DB Row</td>
-                                <td>3-4</td>
-                                <td>10-15</td>
-                                <td>1.5 min</td>
-                                <td><span class="rpe-badge">7-8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Pulley/Row"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Pulley/Row"></td>
-                                <td>Contrazione massima scapole</td>
+                                <td class="font-medium">Lat Machine Presa Larga / Trazioni Assistite</td><td>3-4</td><td>10-15</td><td>60-90 sec</td><td><span class="rpe-badge">8-9</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Lat Machine Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Lat Machine Ipertrofia"></td>
+                                <td>Focus ampiezza dorso.</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Shoulder Press Manubri</td>
-                                <td>3</td>
-                                <td>10-15</td>
-                                <td>1.5 min</td>
-                                <td><span class="rpe-badge">7-8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Shoulder Press"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Shoulder Press"></td>
-                                <td>Movimento controllato</td>
+                                <td class="font-medium">Croci ai Cavi / Pectoral Machine</td><td>3</td><td>12-15</td><td>60 sec</td><td><span class="rpe-badge">9</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Croci/Pec Machine Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Croci/Pec Machine Ipertrofia"></td>
+                                <td>Contrazione di picco.</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Alzate Laterali Manubri</td>
-                                <td>3</td>
-                                <td>12-15</td>
-                                <td>1 min</td>
-                                <td><span class="rpe-badge">8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Alzate Laterali"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Alzate Laterali"></td>
-                                <td>Focus deltoide laterale, no slancio</td>
+                                <td class="font-medium">Shoulder Press Manubri (seduto)</td><td>3</td><td>10-15</td><td>60-90 sec</td><td><span class="rpe-badge">8-9</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Shoulder Press Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Shoulder Press Ipertrofia"></td>
+                                <td>Movimento controllato.</td>
                             </tr>
                              <tr>
-                                <td class="font-medium">Curl Bilanciere EZ / Manubri</td>
-                                <td>3</td>
-                                <td>10-12</td>
-                                <td>1 min</td>
-                                <td><span class="rpe-badge">8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Curl"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Curl"></td>
-                                <td>Contrazione di picco</td>
+                                <td class="font-medium">Alzate Laterali Manubri</td><td>3-4</td><td>12-20</td><td>45-60 sec</td><td><span class="rpe-badge">9-10</span></td>
+                                <td><input type="number" class="styled-input" step="0.25" placeholder="--" aria-label="Peso Alzate Laterali Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Alzate Laterali Ipertrofia"></td>
+                                <td>Bruciore! Tecnica pulita.</td>
                             </tr>
                              <tr>
-                                <td class="font-medium">Push Down Cavi (corda/barra)</td>
-                                <td>3</td>
-                                <td>10-15</td>
-                                <td>1 min</td>
-                                <td><span class="rpe-badge">8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Push Down"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Push Down"></td>
-                                <td>Estensione completa tricipite</td>
+                                <td class="font-medium">Curl Bilanciere EZ / Manubri Alternato</td><td>3</td><td>10-15</td><td>60 sec</td><td><span class="rpe-badge">9</span></td>
+                                <td><input type="number" class="styled-input" step="0.25" placeholder="--" aria-label="Peso Curl Bicipiti Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Curl Bicipiti Ipertrofia"></td>
+                                <td>Supinazione completa se con manubri.</td>
                             </tr>
                              <tr>
-                                <td class="font-medium">Face Pulls</td>
-                                <td>3</td>
-                                <td>15-20</td>
-                                <td>1 min</td>
-                                <td><span class="rpe-badge">7-8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Face Pulls"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Face Pulls"></td>
-                                <td>Deltoidi posteriori/cuffia rotatori</td>
+                                <td class="font-medium">Push Down ai Cavi (corda/barra V)</td><td>3</td><td>12-15</td><td>60 sec</td><td><span class="rpe-badge">9</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Push Down Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Push Down Ipertrofia"></td>
+                                <td>Estensione completa tricipite.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </article>
 
-            <article class="card">
+            <article class="workout-card">
                  <h3 class="card-title">
-                    <span data-lucide="trending-up" class="icon"></span>
-                    Giorno 5: Lower Body (Ipertrofia)
+                    <span data-lucide="mountain" class="icon"></span> <span class="card-title-text">Giorno 4: Ipertrofia - Lower Body & Core</span>
                 </h3>
                 <div class="table-container">
-                    <table>
+                    <table class="workout-table">
                         <thead>
                             <tr>
-                                <th>Esercizio</th>
-                                <th>Serie</th>
-                                <th>Rip.</th>
-                                <th>Recupero</th>
-                                <th>RPE Target</th>
-                                <th>Peso Eff. (kg)</th>
-                                <th>RPE Eff.</th>
-                                <th>Note</th>
+                                <th>Esercizio</th><th>Serie</th><th>Rip.</th><th>Recupero</th><th>RPE Target</th><th>Peso (kg)</th><th>RPE Eff.</th><th>Note</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="font-medium">Hack Squat / Leg Press</td>
-                                <td>3-4</td>
-                                <td>10-15</td>
-                                <td>2 min</td>
-                                <td><span class="rpe-badge">7-8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Hack Squat/Leg Press"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Hack Squat/Leg Press"></td>
-                                <td>Profondità e controllo, focus quad</td>
+                                <td class="font-medium">Leg Press / Hack Squat</td><td>4</td><td>10-15</td><td>90 sec</td><td><span class="rpe-badge">8-9</span></td>
+                                <td><input type="number" class="styled-input" step="1" placeholder="--" aria-label="Peso Leg Press/Hack Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Leg Press/Hack Ipertrofia"></td>
+                                <td>Profondità e tempo sotto tensione.</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Affondi Manubri / Bulgari</td>
-                                <td>3</td>
-                                <td>10-12 / gamba</td>
-                                <td>1.5 min</td>
-                                <td><span class="rpe-badge">7-8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Affondi/Bulgari"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Affondi/Bulgari"></td>
-                                <td>Stabilità, focus gluteo/quad</td>
+                                <td class="font-medium">Affondi Bulgari / Stacchi Rumeni Manubri</td><td>3</td><td>10-15 / gamba</td><td>60-90 sec</td><td><span class="rpe-badge">8-9</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Affondi Bulgari/RDL DB Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Affondi Bulgari/RDL DB Ipertrofia"></td>
+                                <td>Focus glutei e femorali.</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Leg Extension</td>
-                                <td>3</td>
-                                <td>12-15</td>
-                                <td>1 min</td>
-                                <td><span class="rpe-badge">8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Leg Extension"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Leg Extension"></td>
-                                <td>Contrazione di picco, bruciore</td>
+                                <td class="font-medium">Leg Extension</td><td>3-4</td><td>15-20</td><td>45-60 sec</td><td><span class="rpe-badge">9-10</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Leg Extension Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Leg Extension Ipertrofia"></td>
+                                <td>Contrazione di picco, bruciore.</td>
                             </tr>
                             <tr>
-                                <td class="font-medium">Leg Curl (sdraiato/seduto)</td>
-                                <td>3</td>
-                                <td>12-15</td>
-                                <td>1 min</td>
-                                <td><span class="rpe-badge">8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Leg Curl Ipertrofia"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Leg Curl Ipertrofia"></td>
-                                <td>Connessione mente-muscolo</td>
+                                <td class="font-medium">Leg Curl (sdraiato/seduto)</td><td>3-4</td><td>12-18</td><td>45-60 sec</td><td><span class="rpe-badge">9-10</span></td>
+                                <td><input type="number" class="styled-input" step="0.5" placeholder="--" aria-label="Peso Leg Curl Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Leg Curl Ipertrofia"></td>
+                                <td>Connessione mente-muscolo.</td>
                             </tr>
                              <tr>
-                                <td class="font-medium">Hip Thrust Bilanciere</td>
-                                <td>3-4</td>
-                                <td>10-15</td>
-                                <td>1.5 min</td>
-                                <td><span class="rpe-badge">8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Hip Thrust"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Hip Thrust"></td>
-                                <td>Contrazione massima glutei in alto</td>
+                                <td class="font-medium">Calf Raise (in piedi e/o seduto)</td><td>4</td><td>15-25</td><td>45 sec</td><td><span class="rpe-badge">9-10</span></td>
+                                <td><input type="number" class="styled-input" step="1" placeholder="--" aria-label="Peso Calf Raise Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Calf Raise Ipertrofia"></td>
+                                <td>Range completo, pausa in contrazione.</td>
                             </tr>
                              <tr>
-                                <td class="font-medium">Calf Raise (seduto)</td>
-                                <td>3</td>
-                                <td>15-20</td>
-                                <td>1 min</td>
-                                <td><span class="rpe-badge">8</span></td>
-                                <td><input type="number" step="0.5" placeholder="--" aria-label="Peso effettivo Calf Raise Seduto"></td>
-                                <td><input type="number" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE effettivo Calf Raise Seduto"></td>
-                                <td>Focus soleo, range completo</td>
+                                <td class="font-medium">Crunch ai Cavi / Leg Raise Appeso</td><td>3</td><td>15-20 / Max reps</td><td>60 sec</td><td><span class="rpe-badge">9</span></td>
+                                <td><input type="text" class="styled-input" placeholder="--" aria-label="Peso/Note Core Ipertrofia"></td>
+                                <td><input type="number" class="styled-input" min="1" max="10" step="0.5" placeholder="--" aria-label="RPE Core Ipertrofia"></td>
+                                <td>Contrazione addominale completa.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </article>
 
-            <article class="card rest-card">
-                  <h3 class="card-title">
-                     <span data-lucide="bed-double" class="icon"></span>
-                     Giorno 6 & 7: Riposo
-                 </h3>
-                 <p class="text-sm md:text-base">Giornate dedicate al recupero completo. Concentrati su sonno di qualità, nutrizione adeguata e idratazione per ottimizzare la crescita e prevenire il sovrallenamento.</p>
-             </article>
-
+            <div class="workout-card my-8 bg-gray-50 dark:bg-gray-800 border-dashed border-gray-300 dark:border-gray-700">
+                 <h3 class="card-title text-gray-600 dark:text-gray-400">
+                    <span data-lucide="battery-charging" class="icon text-gray-500 dark:text-gray-500"></span>
+                    <span class="card-title-text">Sabato & Domenica: Riposo e Preparazione</span>
+                </h3>
+                <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">
+                    Questi giorni sono cruciali per il recupero e la crescita. Priorità a:
+                    <ul class="list-disc list-inside pl-4 mt-2 space-y-1">
+                        <li><strong>Nutrizione:</strong> Assicurati un adeguato apporto calorico e proteico.</li>
+                        <li><strong>Idratazione:</strong> Bevi abbondante acqua.</li>
+                        <li><strong>Sonno:</strong> Punta a 7-9 ore di sonno di qualità per notte.</li>
+                        <li><strong>Recupero Attivo (Opzionale):</strong> Se ti senti bene, una camminata leggera, stretching o foam rolling possono aiutare. Evita attività intense.</li>
+                        <li><strong>Pianificazione:</strong> Prepara mentalmente e logisticamente la settimana di allenamenti successiva.</li>
+                    </ul>
+                </p>
+            </div>
         </section>
 
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 my-10">
-            <div class="card">
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 my-10 key-principles-section nutrition-guide-section">
+            <div class="workout-card">
                  <h2 class="card-title">
-                    <span data-lucide="key-round" class="icon"></span>
-                    Principi Chiave
+                    <span data-lucide="key" class="icon"></span>
+                    <span class="card-title-text">Principi Fondamentali</span>
                 </h2>
-                <ul class="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400 text-sm pl-2">
-                    <li><strong>Sovraccarico Progressivo:</strong> Aumenta gradualmente carico, ripetizioni, serie o riduci il recupero (mantenendo RPE e tecnica). È FONDAMENTALE.</li>
-                    <li><strong>Scala RPE (Rate of Perceived Exertion):</strong> Usa la scala RPE (1-10) per autoregolare l'intensità. Mira agli RPE indicati per ogni esercizio.</li>
-                     <li><strong>Tecnica > Carico:</strong> Esegui ogni ripetizione con controllo e forma perfetta. Non sacrificare la tecnica per alzare più peso.</li>
-                    <li><strong>Monitoraggio:</strong> Tieni un diario (anche digitale o usando i campi qui sopra!) dei carichi, serie, ripetizioni e RPE per tracciare i progressi.</li>
-                    <li><strong>Deload Periodico:</strong> Ogni 4-8 settimane, considera una settimana di scarico (riduci volume e/o intensità) per favorire il recupero a lungo termine e prevenire stalli.</li>
+                <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 text-sm pl-2">
+                    <li><strong>Sovraccarico Progressivo:</strong> È la chiave. Cerca di migliorare ogni settimana: più peso, più ripetizioni (nello stesso RPE), più serie, o tecnica migliore. Traccia i tuoi progressi!</li>
+                    <li><strong>Tecnica > Carico:</strong> Una forma scorretta aumenta il rischio di infortuni e riduce l'efficacia dell'esercizio. Filmati se necessario.</li>
+                    <li><strong>Scala RPE/RIR:</strong> Impara ad ascoltare il tuo corpo. L'RPE ti guida sull'intensità. Non tutti i giorni sono uguali.</li>
+                    <li><strong>Costanza e Pazienza:</strong> I risultati richiedono tempo e dedizione. Non scoraggiarti.</li>
+                    <li><strong>Periodizzazione (Base):</strong> Alternare focus su forza e ipertrofia è una forma di periodizzazione. Considera un "deload" (settimana di scarico) ogni 6-10 settimane per favorire il recupero a lungo termine (riduci volume e/o intensità del 30-50%).</li>
+                    <li><strong>Ascolta il Tuo Corpo:</strong> Se senti dolore acuto (diverso dalla fatica muscolare), fermati. Non allenarti se sei malato.</li>
                 </ul>
             </div>
-            <div class="card">
+            <div class="workout-card">
                  <h2 class="card-title">
                     <span data-lucide="utensils-crossed" class="icon"></span>
-                    Linee Guida Nutrizionali
+                    <span class="card-title-text">Guida Nutrizionale</span>
                 </h2>
-                 <ul class="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400 text-sm pl-2">
-                    <li><strong>Surplus Calorico Leggero:</strong> Per ipertrofia, mira a un leggero surplus (~250-500 kcal sopra il tuo TDEE - Total Daily Energy Expenditure).</li>
-                    <li><strong>Proteine Adeguate:</strong> Consuma circa 1.6-2.2 grammi di proteine per kg di peso corporeo al giorno (Es: 70kg * 2g = 140g/giorno).</li>
-                    <li><strong>Carboidrati Complessi:</strong> Forniscono energia per gli allenamenti e aiutano il recupero (avena, riso integrale, patate dolci, frutta).</li>
-                    <li><strong>Grassi Sani:</strong> Essenziali per la salute ormonale e generale (avocado, frutta secca, olio d'oliva).</li>
-                    <li><strong>Idratazione:</strong> Bevi abbondante acqua durante tutta la giornata, specialmente prima, durante e dopo l'allenamento.</li>
-                    <li><strong>Timing Nutrizionale (Opzionale):</strong> Consumare un pasto/shake con proteine e carboidrati 1-2 ore prima e/o entro 1-2 ore dopo l'allenamento può essere benefico.</li>
+                 <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 text-sm pl-2">
+                    <li><strong>Calorie:</strong>
+                        <ul class="list-circle list-inside pl-4">
+                            <li><strong>Forza:</strong> Mantenimento o leggero surplus (TDEE / TDEE + 200-300 kcal).</li>
+                            <li><strong>Ipertrofia:</strong> Leggero/moderato surplus (TDEE + 300-500 kcal).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Proteine:</strong> 1.6-2.2g per kg di peso corporeo. Fondamentali per la riparazione e crescita muscolare. (Es: 70kg * 2g = 140g/giorno).</li>
+                    <li><strong>Carboidrati:</strong> Principalmente complessi (avena, riso, patate, frutta, verdura). Forniscono energia. Timing: utili attorno all'allenamento.</li>
+                    <li><strong>Grassi:</strong> Sani (avocado, frutta secca, olio EVO, pesce grasso). Circa 0.8-1.2g per kg di peso. Essenziali per la salute ormonale.</li>
+                    <li><strong>Idratazione:</strong> Almeno 2-3 litri di acqua al giorno, di più se ti alleni intensamente o fa caldo.</li>
+                    <li><strong>Timing dei Nutrienti:</strong> Non è il fattore più critico, ma consumare proteine e carboidrati nel post-workout (entro 1-2 ore) può essere benefico.</li>
+                    <li><strong>Integrazione (Opzionale):</strong> Creatina Monoidrato (3-5g/giorno) è sicura ed efficace. Proteine in polvere se fai fatica a raggiungere il fabbisogno. Vitamina D se carente. Omega-3.</li>
                 </ul>
-                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-4 italic">Queste sono linee guida generali. Per piani nutrizionali personalizzati, consulta un professionista (dietologo o nutrizionista sportivo).</p>
+                 <p class="text-xs text-gray-500 dark:text-gray-400 mt-4 italic">Queste sono linee guida. Per un piano dettagliato, consulta un nutrizionista sportivo.</p>
             </div>
         </section>
 
-         <footer class="text-center mt-10 text-xs">
-             <p class="mb-2"><strong>Disclaimer:</strong> Questo programma è una linea guida generale. Consulta sempre un medico prima di iniziare qualsiasi nuovo programma di allenamento o regime alimentare. Adatta il piano alle tue sensazioni, capacità e necessità individuali. Presta la massima attenzione alla tecnica di esecuzione per prevenire infortuni. L'autore non si assume responsabilità per eventuali infortuni o problemi derivanti dall'uso improprio di questa scheda.</p>
-             <p>&copy; 2025 - Scheda generata per te.</p>
+         <footer class="main-footer">
+             <p class="mb-2"><strong>Disclaimer Importante:</strong> Questa scheda di allenamento è fornita a scopo informativo e si basa su principi generali di fitness. Non sostituisce il parere di un medico qualificato o di un personal trainer certificato. Consulta sempre un professionista prima di iniziare qualsiasi nuovo programma di allenamento o regime alimentare, specialmente se hai condizioni mediche preesistenti. Esegui gli esercizi con la tecnica corretta per prevenire infortuni. L'utilizzo di questa scheda è a tuo rischio e pericolo.</p>
+             <p>&copy; <span id="currentYear"></span> FitPlan Elite - Generato per te.</p>
          </footer>
-
     </main>
 
     <script>
         const themeToggle = document.getElementById('theme-toggle');
         const printButton = document.getElementById('printBtn');
-        const docHtml = document.documentElement; // Get the <html> element
+        const docHtml = document.documentElement;
         const themeIconLight = document.getElementById('theme-icon-light');
         const themeIconDark = document.getElementById('theme-icon-dark');
+        const currentYearSpan = document.getElementById('currentYear');
 
-        // Function to apply theme (light/dark)
+        // Set current year in footer
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+
         const applyTheme = (theme) => {
             if (theme === 'dark') {
                 docHtml.classList.add('dark');
-                themeIconLight.classList.add('hidden');
-                themeIconDark.classList.remove('hidden');
+                if(themeIconLight) themeIconLight.classList.add('hidden');
+                if(themeIconDark) themeIconDark.classList.remove('hidden');
             } else {
                 docHtml.classList.remove('dark');
-                themeIconLight.classList.remove('hidden');
-                themeIconDark.classList.add('hidden');
+                if(themeIconLight) themeIconLight.classList.remove('hidden');
+                if(themeIconDark) themeIconDark.classList.add('hidden');
             }
-             // Re-render icons after theme change if needed (sometimes useful)
-             lucide.createIcons();
+            // Lucide icons might need re-rendering after theme change if colors are dynamic via CSS vars affecting SVG
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         };
 
-        // Function to toggle theme
         const toggleTheme = () => {
             const currentTheme = docHtml.classList.contains('dark') ? 'dark' : 'light';
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            localStorage.setItem('theme', newTheme); // Save preference
+            localStorage.setItem('theme', newTheme);
             applyTheme(newTheme);
         };
 
-        // Event Listener for Theme Toggle Button
         if (themeToggle) {
             themeToggle.addEventListener('click', toggleTheme);
         }
 
-        // Event Listener for Print Button
         if (printButton) {
             printButton.addEventListener('click', () => {
-                window.print(); // Open browser print dialog
+                window.print();
             });
         }
 
-        // Funzione per salvare i dati degli input nel localStorage
+        // Save and Load input data
         const saveInputData = () => {
-            const inputs = document.querySelectorAll('input[type="number"]');
+            const inputs = document.querySelectorAll('.styled-input');
             const data = {};
-            
-            inputs.forEach((input, index) => {
-                // Usa l'aria-label come identificatore unico o un indice se non disponibile
-                const id = input.getAttribute('aria-label') || `input-${index}`;
-                data[id] = input.value;
+            inputs.forEach(input => {
+                const id = input.getAttribute('aria-label');
+                if (id) { // Only save if aria-label (our key) exists
+                    data[id] = input.value;
+                }
             });
-            
-            localStorage.setItem('schedaAllenamentoData', JSON.stringify(data));
-            console.log('Dati salvati nel localStorage');
+            localStorage.setItem('fitPlanEliteData', JSON.stringify(data));
         };
-        
-        // Funzione per caricare i dati dal localStorage
+
         const loadInputData = () => {
-            const savedData = localStorage.getItem('schedaAllenamentoData');
+            const savedData = localStorage.getItem('fitPlanEliteData');
             if (savedData) {
                 const data = JSON.parse(savedData);
-                const inputs = document.querySelectorAll('input[type="number"]');
-                
-                inputs.forEach((input, index) => {
-                    const id = input.getAttribute('aria-label') || `input-${index}`;
-                    if (data[id]) {
+                const inputs = document.querySelectorAll('.styled-input');
+                inputs.forEach(input => {
+                    const id = input.getAttribute('aria-label');
+                    if (id && data[id] !== undefined) {
                         input.value = data[id];
                     }
                 });
-                
-                console.log('Dati caricati dal localStorage');
             }
         };
-        
-        // Aggiunge event listener a tutti gli input per salvare i dati quando cambiano
+
         const setupInputListeners = () => {
-            const inputs = document.querySelectorAll('input[type="number"]');
+            const inputs = document.querySelectorAll('.styled-input');
             inputs.forEach(input => {
                 input.addEventListener('change', saveInputData);
-                input.addEventListener('input', saveInputData);
+                input.addEventListener('input', saveInputData); // More responsive saving
             });
-            console.log('Event listener per il salvataggio dati configurati');
         };
-
-        // Initial Setup on Load
+        
+        // Initial Setup
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Initialize Lucide Icons
-            lucide.createIcons();
-            console.log("Scheda allenamento caricata, icone inizializzate.");
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
 
-            // 2. Apply saved theme or detect system preference
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
             if (savedTheme) {
                 applyTheme(savedTheme);
-                console.log(`Tema caricato da localStorage: ${savedTheme}`);
             } else if (prefersDark) {
                 applyTheme('dark');
-                console.log("Tema scuro preferito dal sistema applicato.");
             } else {
-                 applyTheme('light'); // Default to light
-                 console.log("Tema chiaro di default applicato.");
+                applyTheme('light'); // Default
             }
             
-            // 3. Carica i dati salvati e configura i listener per il salvataggio
             loadInputData();
             setupInputListeners();
-
-            // 4. Log readiness
-            console.log("Funzionalità Stampa, Tema e Salvataggio Dati attive!");
+            console.log("FitPlan Elite caricato e pronto!");
         });
     </script>
 
