@@ -9,57 +9,60 @@
     <meta name="apple-mobile-web-app-title" content="FitPlan Elite">
     <link rel="manifest" href="manifest.json"> <title>FitPlan Elite - Il Tuo Allenamento Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
             /* Light Mode - Fitness Inspired */
-            --bg-primary-light: #FFFFFF;
-            --bg-secondary-light: #F0F0F0;
-            --bg-accent-light: #000000;
-            --bg-accent-hover-light: #333333;
-            --text-primary-light: #000000;
-            --text-secondary-light: #333333;
-            --text-accent-light: #000000;
-            --border-primary-light: #000000;
-            --border-accent-light: #000000;
-            --shadow-color-light: transparent;
-            --icon-primary-light: #000000;
-            --icon-secondary-light: #333333;
-            --input-bg-light: #FFFFFF;
-            --input-border-light: #000000;
-            --input-focus-border-light: #000000;
-            --rpe-bg-light: #FFFFFF;
-            --rpe-text-light: #000000;
-            --rpe-border-light: #000000;
+            --bg-primary-light: #F0F4F8; /* Sfondo principale chiaro, quasi bianco ma più morbido */
+            --bg-secondary-light: #FFFFFF; /* Sfondo per card e sezioni */
+            --bg-accent-light: #10B981; /* Verde smeraldo per accenti primari (call to action, icone) */
+            --bg-accent-hover-light: #059669; /* Verde più scuro per hover */
+            --text-primary-light: #1F2937; /* Testo principale scuro (quasi nero) */
+            --text-secondary-light: #4B5563; /* Testo secondario grigio scuro */
+            --text-accent-light: #10B981; /* Testo con accento verde */
+            --border-primary-light: #D1D5DB; /* Bordi principali grigio chiaro */
+            --border-accent-light: #10B981; /* Bordi con accento verde */
+            --shadow-color-light: rgba(0, 0, 0, 0.08);
+            --icon-primary-light: #10B981;
+            --icon-secondary-light: #6B7280;
+            --input-bg-light: #F9FAFB;
+            --input-border-light: #D1D5DB;
+            --input-focus-border-light: #10B981;
+            --rpe-bg-light: #ECFDF5; /* Sfondo badge RPE verde chiaro */
+            --rpe-text-light: #065F46; /* Testo badge RPE verde scuro */
+            --rpe-border-light: #A7F3D0; /* Bordo badge RPE verde */
             --header-gradient-start-light: #FFFFFF;
-            --header-gradient-end-light: #FFFFFF;
+            --header-gradient-end-light: #F0F4F8;
 
 
             /* Dark Mode - Fitness Inspired */
-            --bg-primary-dark: #000000;
-            --bg-secondary-dark: #1A1A1A;
-            --bg-accent-dark: #FFFFFF;
-            --bg-accent-hover-dark: #CCCCCC;
-            --text-primary-dark: #FFFFFF;
-            --text-secondary-dark: #CCCCCC;
-            --text-accent-dark: #FFFFFF;
-            --border-primary-dark: #FFFFFF;
-            --border-accent-dark: #FFFFFF;
-            --shadow-color-dark: transparent;
-            --icon-primary-dark: #FFFFFF;
-            --icon-secondary-dark: #CCCCCC;
-            --input-bg-dark: #000000;
-            --input-border-dark: #FFFFFF;
-            --input-focus-border-dark: #FFFFFF;
-            --rpe-bg-dark: #000000;
-            --rpe-text-dark: #FFFFFF;
-            --rpe-border-dark: #FFFFFF;
-            --header-gradient-start-dark: #000000;
-            --header-gradient-end-dark: #000000;
+            --bg-primary-dark: #111827; /* Sfondo principale molto scuro (quasi nero) */
+            --bg-secondary-dark: #1F2937; /* Sfondo per card e sezioni (grigio scuro) */
+            --bg-accent-dark: #34D399; /* Verde smeraldo più brillante per accenti primari in dark mode */
+            --bg-accent-hover-dark: #10B981; /* Verde smeraldo standard per hover */
+            --text-primary-dark: #F3F4F6; /* Testo principale chiaro (quasi bianco) */
+            --text-secondary-dark: #9CA3AF; /* Testo secondario grigio chiaro */
+            --text-accent-dark: #34D399; /* Testo con accento verde brillante */
+            --border-primary-dark: #374151; /* Bordi principali grigio scuro */
+            --border-accent-dark: #34D399; /* Bordi con accento verde brillante */
+            --shadow-color-dark: rgba(0, 0, 0, 0.3);
+            --icon-primary-dark: #34D399;
+            --icon-secondary-dark: #9CA3AF;
+            --input-bg-dark: #374151;
+            --input-border-dark: #4B5563;
+            --input-focus-border-dark: #34D399;
+            --rpe-bg-dark: #064E3B; /* Sfondo badge RPE verde scuro */
+            --rpe-text-dark: #A7F3D0; /* Testo badge RPE verde chiaro */
+            --rpe-border-dark: #34D399; /* Bordo badge RPE verde brillante */
+            --header-gradient-start-dark: #1F2937;
+            --header-gradient-end-dark: #111827;
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: var(--bg-primary-light);
             color: var(--text-secondary-light);
             transition: background-color 0.3s ease, color 0.3s ease;
@@ -73,39 +76,32 @@
         }
 
         h1, h2, h3, .card-title-text {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Orbitron', sans-serif; /* Font più "tech" per i titoli */
         }
 
         /* Card Styling */
         .workout-card {
             background-color: var(--bg-secondary-light);
-            border-radius: 0;
+            border-radius: 0.75rem; /* rounded-xl */
             padding: 1.5rem; /* p-6 */
-            box-shadow: none;
+            box-shadow: 0 10px 15px -3px var(--shadow-color-light), 0 4px 6px -4px var(--shadow-color-light);
             margin-bottom: 1.5rem; /* mb-6 */
             border: 1px solid var(--border-primary-light);
-            transition: border-color 0.3s ease; /* Only transition border-color */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .dark .workout-card {
             background-color: var(--bg-secondary-dark);
             border-color: var(--border-primary-dark);
-            box-shadow: none;
+            box-shadow: 0 10px 15px -3px var(--shadow-color-dark), 0 4px 6px -4px var(--shadow-color-dark);
         }
         .workout-card:hover {
-            /* transform: translateY(-5px) scale(1.01); */ /* Removed */
-            box-shadow: none;
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 20px 25px -5px var(--shadow-color-light), 0 8px 10px -6px var(--shadow-color-light);
             border-color: var(--border-accent-light);
         }
         .dark .workout-card:hover {
-            box-shadow: none;
+            box-shadow: 0 20px 25px -5px var(--shadow-color-dark), 0 8px 10px -6px var(--shadow-color-dark);
             border-color: var(--border-accent-dark);
-        }
-
-        article.workout-card {
-            border-top: 1px solid var(--border-primary-light);
-        }
-        .dark article.workout-card {
-            border-top-color: var(--border-primary-dark);
         }
 
         .card-title {
@@ -137,7 +133,7 @@
         .table-container {
             overflow-x: auto;
             border: 1px solid var(--border-primary-light);
-            border-radius: 0;
+            border-radius: 0.5rem; /* rounded-lg */
             background-color: var(--bg-secondary-light);
         }
         .dark .table-container {
@@ -175,30 +171,27 @@
             color: var(--text-primary-dark);
         }
         .workout-table tbody tr:hover {
-            /* Brutalist: No specific hover effects, or very minimal like an outline */
-            /* background-color: transparent !important; */
-            /* color: inherit !important; */
-            /* outline: 1px solid var(--text-primary-light); */
+            background-color: var(--bg-accent-light) !important; /* Usa !important con cautela, ma qui per enfasi hover */
+            color: var(--bg-secondary-light) !important;
         }
         .dark .workout-table tbody tr:hover {
-            /* background-color: transparent !important; */
-            /* color: inherit !important; */
-            /* outline: 1px solid var(--text-primary-dark); */
+            background-color: var(--bg-accent-dark) !important;
+            color: var(--bg-secondary-dark) !important;
         }
-        /* .workout-table tbody tr:hover td, .workout-table tbody tr:hover .rpe-badge { */
-             /* color: inherit !important; */
-        /* } */
-        /* .dark .workout-table tbody tr:hover td, .dark .workout-table tbody tr:hover .rpe-badge { */
-             /* color: inherit !important; */
-        /* } */
-         /* .dark .workout-table tbody tr:hover .rpe-badge { */
-            /* background-color: var(--rpe-bg-dark); */ /* Revert to original or remove if no specific hover for badge */
-            /* border-color: var(--rpe-border-dark); */
-        /* } */
-        /* .workout-table tbody tr:hover .rpe-badge { */
-            /* background-color: var(--rpe-bg-light); */ /* Revert to original or remove */
-            /* border-color: var(--rpe-border-light); */
-        /* } */
+        .workout-table tbody tr:hover td, .workout-table tbody tr:hover .rpe-badge {
+             color: var(--bg-secondary-light) !important; /* Assicura che il testo nel badge cambi colore */
+        }
+        .dark .workout-table tbody tr:hover td, .dark .workout-table tbody tr:hover .rpe-badge {
+             color: var(--bg-secondary-dark) !important;
+        }
+         .dark .workout-table tbody tr:hover .rpe-badge {
+            background-color: var(--bg-secondary-dark); /* Cambia sfondo badge su hover riga */
+            border-color: var(--bg-secondary-dark);
+        }
+        .workout-table tbody tr:hover .rpe-badge {
+            background-color: var(--bg-secondary-light);
+            border-color: var(--bg-secondary-light);
+        }
 
 
         /* Input Fields */
@@ -206,12 +199,12 @@
             background-color: var(--input-bg-light);
             color: var(--text-primary-light);
             border: 1px solid var(--input-border-light);
-            border-radius: 0;
+            border-radius: 0.375rem; /* rounded-md */
             padding: 0.5rem 0.75rem; /* py-2 px-3 */
             font-size: 0.875rem; /* text-sm */
             width: 6rem; /* w-24 */
             text-align: center;
-            transition: border-color 0.2s ease; /* Removed box-shadow transition */
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
             -moz-appearance: textfield;
         }
         .dark .styled-input {
@@ -227,11 +220,11 @@
         .styled-input:focus {
             outline: none;
             border-color: var(--input-focus-border-light);
-            /* box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3); */ /* Removed */
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3); /* Ombra focus verde */
         }
         .dark .styled-input:focus {
             border-color: var(--input-focus-border-dark);
-            /* box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.3); */ /* Removed */
+            box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.3);
         }
 
         /* RPE Badge */
@@ -240,7 +233,7 @@
             padding: 0.3rem 0.75rem; /* py-1 px-3 */
             font-size: 0.8rem; /* text-xs */
             font-weight: 700; /* font-bold */
-            border-radius: 0;
+            border-radius: 9999px; /* rounded-full */
             line-height: 1;
             background-color: var(--rpe-bg-light);
             color: var(--rpe-text-light);
@@ -259,10 +252,10 @@
             margin-bottom: 2.5rem; /* mb-10 */
             text-align: center;
             position: relative;
-            background: var(--bg-primary-light);
+            background: linear-gradient(135deg, var(--header-gradient-start-light) 0%, var(--header-gradient-end-light) 100%);
         }
         .dark .main-header {
-             background: var(--bg-primary-dark);
+             background: linear-gradient(135deg, var(--header-gradient-start-dark) 0%, var(--header-gradient-end-dark) 100%);
         }
         .main-header h1 {
             font-size: 3rem; /* text-5xl */
@@ -275,7 +268,7 @@
         .main-header .subtitle {
             font-size: 1.25rem; /* text-xl */
             color: var(--text-secondary-light);
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Roboto', sans-serif;
         }
         .dark .main-header .subtitle { color: var(--text-secondary-dark); }
 
@@ -287,30 +280,30 @@
             padding: 0.6rem; /* Increased padding */
             background-color: var(--bg-secondary-light);
             color: var(--text-secondary-light);
-            border-radius: 0;
+            border-radius: 0.5rem; /* rounded-lg */
             border: 1px solid var(--border-primary-light);
             cursor: pointer;
-            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out; /* Simplified transition */
-            box-shadow: none;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 1px 3px 0 var(--shadow-color-light), 0 1px 2px -1px var(--shadow-color-light);
         }
         .dark .action-button {
             background-color: var(--bg-secondary-dark);
             color: var(--text-secondary-dark);
             border-color: var(--border-primary-dark);
-            box-shadow: none;
+            box-shadow: 0 1px 3px 0 var(--shadow-color-dark), 0 1px 2px -1px var(--shadow-color-dark);
         }
         .action-button:hover {
             background-color: var(--bg-accent-light);
             border-color: var(--bg-accent-light);
-            color: var(--text-accent-light); /* Using variable for consistency if text color should be accent on hover */
-            /* transform: translateY(-2px) scale(1.05); */ /* Removed */
-            box-shadow: none;
+            color: #FFFFFF; /* Testo bianco su sfondo verde */
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 8px -2px rgba(16,185,129,0.4), 0 2px 4px -2px rgba(16,185,129,0.3);
         }
         .dark .action-button:hover {
             background-color: var(--bg-accent-dark);
             border-color: var(--bg-accent-dark);
-            color: var(--text-accent-dark); /* Using variable for consistency */
-            box-shadow: none;
+            color: var(--bg-primary-dark); /* Testo scuro su sfondo verde brillante */
+            box-shadow: 0 4px 8px -2px rgba(52,211,153,0.4), 0 2px 4px -2px rgba(52,211,153,0.3);
         }
         .action-button .icon {
             width: 1.5rem; /* w-6 h-6 */
@@ -338,10 +331,10 @@
 
         /* Scrollbar */
         ::-webkit-scrollbar { width: 10px; height: 10px; }
-        ::-webkit-scrollbar-track { background: var(--bg-primary-light); /* border-radius: 10px; */ /* Removed for brutalist style */ }
+        ::-webkit-scrollbar-track { background: var(--bg-primary-light); border-radius: 10px; }
         .dark ::-webkit-scrollbar-track { background: var(--bg-primary-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--bg-accent-light); border-radius: 0; border: 2px solid var(--bg-primary-light); }
-        .dark ::-webkit-scrollbar-thumb { background: var(--bg-accent-dark); border-radius: 0; border: 2px solid var(--bg-primary-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--bg-accent-light); border-radius: 10px; border: 2px solid var(--bg-primary-light); }
+        .dark ::-webkit-scrollbar-thumb { background: var(--bg-accent-dark); border: 2px solid var(--bg-primary-dark); }
         ::-webkit-scrollbar-thumb:hover { background: var(--bg-accent-hover-light); }
         .dark ::-webkit-scrollbar-thumb:hover { background: var(--bg-accent-hover-dark); }
 
@@ -474,7 +467,7 @@
 
     <main class="max-w-7xl mx-auto">
 
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 user-data-section weekly-schedule-section">
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10 user-data-section weekly-schedule-section">
             <div class="workout-card">
                 <h2 class="card-title">
                     <span data-lucide="user" class="icon"></span>
@@ -507,7 +500,7 @@
             </div>
         </section>
 
-        <section class="workout-card mb-8 warmup-cooldown-section">
+        <section class="workout-card mb-10 warmup-cooldown-section">
              <h2 class="card-title">
                  <span data-lucide="flame" class="icon"></span>
                  <span class="card-title-text">Warm-up & Cool-down</span>
@@ -534,7 +527,7 @@
              </div>
         </section>
 
-        <section class="workout-card mb-8 rpe-guide-section">
+        <section class="workout-card mb-10 rpe-guide-section">
             <h2 class="card-title">
                 <span data-lucide="activity" class="icon"></span>
                 <span class="card-title-text">Guida alla Scala RPE</span>
@@ -824,7 +817,7 @@
             </div>
         </section>
 
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8 mb-8 key-principles-section nutrition-guide-section">
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 my-10 key-principles-section nutrition-guide-section">
             <div class="workout-card">
                  <h2 class="card-title">
                     <span data-lucide="key" class="icon"></span>
